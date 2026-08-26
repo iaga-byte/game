@@ -3,309 +3,872 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Квадратный психоз</title>
+<title>Technopark // Skolkovo — Tech Rush</title>
 
 <style>
     * {
         box-sizing: border-box;
         user-select: none;
+        -webkit-tap-highlight-color: transparent;
     }
 
     body {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background: #111827;
-        color: white;
         overflow: hidden;
+        font-family: Arial, sans-serif;
+        color: #fff;
+
+        background:
+            radial-gradient(circle at 15% 20%, rgba(0, 190, 255, .22), transparent 30%),
+            radial-gradient(circle at 85% 25%, rgba(50, 255, 150, .16), transparent 30%),
+            radial-gradient(circle at 70% 80%, rgba(120, 70, 255, .20), transparent 35%),
+            #06111d;
     }
+
+    /* Технологическая сетка */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+
+        background-image:
+            linear-gradient(rgba(0, 210, 255, .055) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 210, 255, .055) 1px, transparent 1px);
+
+        background-size: 35px 35px;
+        pointer-events: none;
+    }
+
+    /* Дополнительное зелёное свечение */
+    body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+
+        background:
+            radial-gradient(circle at 10% 90%, rgba(0, 255, 140, .10), transparent 25%),
+            radial-gradient(circle at 90% 10%, rgba(50, 255, 150, .08), transparent 25%);
+
+        pointer-events: none;
+    }
+
+
+    /* =========================
+       ГЛАВНОЕ МЕНЮ
+       ========================= */
 
     #menu {
         position: fixed;
         inset: 0;
+        z-index: 20;
+
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(135deg, #111827, #312e81);
-        z-index: 10;
+
         text-align: center;
+
+        background:
+            radial-gradient(circle at center,
+                #17385a,
+                #071421 55%,
+                #03080e 100%);
+    }
+
+    .menu-box {
+        width: min(90%, 500px);
+        padding: 42px 25px;
+
+        border: 1px solid rgba(50, 255, 160, .35);
+        border-radius: 25px;
+
+        background: rgba(7, 25, 40, .78);
+
+        box-shadow:
+            0 0 50px rgba(0, 190, 255, .15),
+            0 0 80px rgba(0, 255, 140, .06),
+            inset 0 0 30px rgba(0, 210, 255, .05);
+
+        backdrop-filter: blur(10px);
+    }
+
+    .logo {
+        font-size: 18px;
+        letter-spacing: 4px;
+
+        color: #54dcff;
+
+        margin-bottom: 15px;
+
+        text-shadow:
+            0 0 12px rgba(84, 220, 255, .5);
     }
 
     h1 {
-        font-size: 48px;
-        margin: 0 0 10px;
+        margin: 0;
+
+        font-size: clamp(38px, 10vw, 64px);
+        line-height: 1;
+
+        background:
+            linear-gradient(
+                90deg,
+                #ffffff,
+                #58dcff,
+                #5cffaa
+            );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
     }
 
-    #menu p {
-        color: #cbd5e1;
-        font-size: 18px;
-        margin-bottom: 30px;
+    .subtitle {
+        color: #a9bdd8;
+
+        margin: 20px 0 30px;
+
+        font-size: 17px;
+        line-height: 1.5;
     }
 
     button {
-        border: 0;
-        background: #22c55e;
-        color: white;
-        padding: 15px 35px;
+        border: 1px solid rgba(90, 255, 170, .4);
+
+        padding: 16px 38px;
+
         border-radius: 12px;
-        font-size: 20px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #00bfff,
+                #4770ff 55%,
+                #12d879
+            );
+
+        color: white;
+
+        font-size: 18px;
         font-weight: bold;
+
         cursor: pointer;
-        transition: 0.15s;
+
+        box-shadow:
+            0 0 20px rgba(0, 190, 255, .3),
+            0 0 25px rgba(0, 255, 140, .15);
+
+        transition: .2s;
     }
 
     button:hover {
-        transform: scale(1.05);
-        background: #16a34a;
+        transform: translateY(-2px) scale(1.03);
+
+        box-shadow:
+            0 0 30px rgba(0, 200, 255, .5),
+            0 0 35px rgba(0, 255, 140, .3);
     }
+
+
+    /* =========================
+       ИГРА
+       ========================= */
 
     #game {
+        position: relative;
+
         width: 100vw;
         height: 100vh;
-        position: relative;
     }
 
-    #top {
+
+    /* Верхняя панель */
+
+    #header {
         position: absolute;
-        top: 20px;
+
+        z-index: 5;
+
+        top: 15px;
         left: 50%;
+
         transform: translateX(-50%);
+
+        width: min(92%, 650px);
+
         display: flex;
-        gap: 30px;
-        background: rgba(0,0,0,.3);
-        padding: 12px 25px;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 12px 18px;
+
+        border: 1px solid rgba(70, 220, 255, .25);
+
         border-radius: 15px;
-        font-size: 20px;
-        z-index: 2;
+
+        background:
+            rgba(5, 20, 35, .75);
+
+        backdrop-filter: blur(8px);
+
+        box-shadow:
+            0 0 20px rgba(0, 180, 255, .08);
+    }
+
+    .brand {
+        color: #54dfff;
+
+        font-size: 13px;
+
+        letter-spacing: 2px;
+
+        font-weight: bold;
+
+        text-shadow:
+            0 0 10px rgba(84, 223, 255, .5);
+    }
+
+    .stats {
+        display: flex;
+        gap: 20px;
+    }
+
+    .stat {
+        color: #8da6c2;
+
+        font-size: 13px;
     }
 
     .stat span {
+        color: #62ffa9;
+
+        font-size: 18px;
+
         font-weight: bold;
-        color: #4ade80;
+
+        text-shadow:
+            0 0 10px rgba(70, 255, 160, .5);
     }
 
-    #target {
-        position: absolute;
-        width: 80px;
-        height: 80px;
-        background: #ef4444;
-        border-radius: 12px;
-        cursor: pointer;
-        box-shadow: 0 0 25px rgba(239,68,68,.6);
-        transition: width .15s, height .15s;
-    }
+
+    /* Таймер */
 
     #timerBar {
         position: absolute;
-        top: 75px;
+
+        z-index: 5;
+
+        top: 78px;
         left: 50%;
+
         transform: translateX(-50%);
-        width: 250px;
-        height: 7px;
-        background: #374151;
+
+        width: min(80%, 350px);
+
+        height: 5px;
+
+        background:
+            rgba(255,255,255,.1);
+
         border-radius: 10px;
+
         overflow: hidden;
     }
 
     #timerFill {
-        width: 100%;
         height: 100%;
-        background: #22c55e;
+        width: 100%;
+
+        background:
+            linear-gradient(
+                90deg,
+                #00d9ff,
+                #6d5cff,
+                #32f58c
+            );
+
+        box-shadow:
+            0 0 10px rgba(40, 255, 150, .5);
+
         transform-origin: left;
     }
 
-    #gameOver {
-        position: fixed;
-        inset: 0;
+
+    /* =========================
+       ЦЕЛЬ
+       ========================= */
+
+    #target {
+        position: absolute;
+
         display: none;
+
+        width: 85px;
+        height: 85px;
+
+        border-radius: 20px;
+
+        cursor: pointer;
+
         justify-content: center;
         align-items: center;
-        background: rgba(0,0,0,.75);
-        z-index: 5;
+
+        font-size: 40px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(0, 210, 255, .15),
+                rgba(20, 255, 140, .12)
+            );
+
+        border: 2px solid #4ce6ff;
+
+        box-shadow:
+            0 0 15px #00cfff,
+            0 0 30px rgba(40, 255, 150, .15),
+            inset 0 0 20px rgba(0, 220, 255, .15);
+
+        animation:
+            pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+
+        from {
+            transform: scale(.95);
+
+            box-shadow:
+                0 0 12px #00cfff,
+                0 0 15px rgba(40, 255, 150, .1);
+        }
+
+        to {
+            transform: scale(1.05);
+
+            box-shadow:
+                0 0 30px #00cfff,
+                0 0 35px rgba(40, 255, 150, .3);
+        }
+    }
+
+    .scan {
+        position: absolute;
+
+        pointer-events: none;
+
+        width: 100%;
+        height: 2px;
+
+        background:
+            linear-gradient(
+                90deg,
+                transparent,
+                #58ffad,
+                transparent
+            );
+
+        animation:
+            scan 1.5s infinite;
+    }
+
+    @keyframes scan {
+
+        from {
+            top: 0;
+        }
+
+        to {
+            top: 100%;
+        }
+    }
+
+
+    /* =========================
+       GAME OVER
+       ========================= */
+
+    #gameOver {
+        position: fixed;
+
+        inset: 0;
+
+        z-index: 30;
+
+        display: none;
+
+        justify-content: center;
+        align-items: center;
+
+        background:
+            rgba(2, 7, 15, .82);
+
+        backdrop-filter: blur(8px);
     }
 
     .result {
+        width: min(90%, 430px);
+
+        padding: 35px;
+
         text-align: center;
-        background: #1f2937;
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 20px 50px rgba(0,0,0,.5);
+
+        border-radius: 22px;
+
+        background:
+            linear-gradient(
+                145deg,
+                #0b1b30,
+                #09231e
+            );
+
+        border: 1px solid rgba(70, 255, 160, .3);
+
+        box-shadow:
+            0 0 50px rgba(0, 150, 255, .2),
+            0 0 50px rgba(0, 255, 140, .08);
     }
 
     .result h2 {
-        font-size: 40px;
         margin-top: 0;
+
+        font-size: 32px;
     }
 
     #finalScore {
-        font-size: 60px;
-        color: #4ade80;
+        font-size: 70px;
+
         font-weight: bold;
-        margin: 20px;
+
+        color: #50dcff;
+
+        text-shadow:
+            0 0 25px rgba(0, 210, 255, .5),
+            0 0 35px rgba(50, 255, 150, .25);
+
+        margin: 15px 0;
     }
 
     #record {
-        color: #facc15;
+        color: #63ffa9;
+
         margin-bottom: 25px;
+
+        text-shadow:
+            0 0 10px rgba(60, 255, 150, .35);
     }
+
+
+    /* Подсказка */
+
+    .hint {
+        position: absolute;
+
+        bottom: 18px;
+
+        width: 100%;
+
+        text-align: center;
+
+        color: rgba(170, 200, 225, .5);
+
+        font-size: 12px;
+
+        pointer-events: none;
+    }
+
 </style>
 </head>
 
 <body>
 
+
+<!-- =========================
+     ГЛАВНЫЙ ЭКРАН
+     ========================= -->
+
 <div id="menu">
-    <h1>🟥 Квадратный психоз</h1>
-    <p>Нажимай на красный квадрат как можно быстрее!</p>
-    <button onclick="startGame()">Начать игру</button>
+
+    <div class="menu-box">
+
+        <div class="logo">
+            TECHNOPARK // SKOLKOVO
+        </div>
+
+        <h1>
+            TECH RUSH
+        </h1>
+
+        <div class="subtitle">
+            Система обнаружила инновационные объекты.<br>
+            Найди их как можно быстрее.
+        </div>
+
+        <button onclick="startGame()">
+            Запустить систему
+        </button>
+
+    </div>
+
 </div>
+
+
+<!-- =========================
+     ИГРА
+     ========================= -->
 
 <div id="game">
 
-    <div id="top">
-        <div class="stat">Очки: <span id="score">0</span></div>
-        <div class="stat">Рекорд: <span id="best">0</span></div>
+    <div id="header">
+
+        <div class="brand">
+            TECHNOPARK // SKOLKOVO
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                SCORE<br>
+                <span id="score">0</span>
+            </div>
+
+            <div class="stat">
+                BEST<br>
+                <span id="best">0</span>
+            </div>
+
+        </div>
+
     </div>
+
 
     <div id="timerBar">
+
         <div id="timerFill"></div>
+
     </div>
 
-    <div id="target"></div>
+
+    <div id="target">
+
+        <div class="scan"></div>
+
+        🤖
+
+    </div>
+
+
+    <div class="hint">
+        НАЖИМАЙ НА ОБЪЕКТЫ // СКОРОСТЬ СИСТЕМЫ УВЕЛИЧИВАЕТСЯ
+    </div>
 
 </div>
+
+
+<!-- =========================
+     GAME OVER
+     ========================= -->
 
 <div id="gameOver">
+
     <div class="result">
-        <h2>Игра окончена!</h2>
-        <div id="finalScore">0</div>
-        <div id="record">🏆 Рекорд!</div>
-        <button onclick="startGame()">Играть снова</button>
+
+        <h2>
+            Система остановлена
+        </h2>
+
+        <div id="finalScore">
+            0
+        </div>
+
+        <div id="record">
+            Лучший результат: 0
+        </div>
+
+        <button onclick="startGame()">
+            Перезапустить
+        </button>
+
     </div>
+
 </div>
 
+
 <script>
-    const target = document.getElementById("target");
-    const scoreElement = document.getElementById("score");
-    const bestElement = document.getElementById("best");
-    const timerFill = document.getElementById("timerFill");
-    const menu = document.getElementById("menu");
-    const gameOver = document.getElementById("gameOver");
-    const finalScore = document.getElementById("finalScore");
-    const record = document.getElementById("record");
 
-    let score = 0;
-    let best = Number(localStorage.getItem("squareBest")) || 0;
-    let gameRunning = false;
-    let timer;
-    let timeLimit = 2000;
+const target =
+    document.getElementById("target");
 
-    bestElement.textContent = best;
+const scoreElement =
+    document.getElementById("score");
 
-    target.addEventListener("click", hitTarget);
+const bestElement =
+    document.getElementById("best");
 
-    function startGame() {
-        score = 0;
-        timeLimit = 2000;
-        gameRunning = true;
+const timerFill =
+    document.getElementById("timerFill");
 
-        scoreElement.textContent = score;
-        menu.style.display = "none";
-        gameOver.style.display = "none";
+const menu =
+    document.getElementById("menu");
 
-        target.style.display = "block";
+const gameOver =
+    document.getElementById("gameOver");
 
-        moveTarget();
-        startTimer();
-    }
+const finalScore =
+    document.getElementById("finalScore");
 
-    function hitTarget() {
-        if (!gameRunning) return;
+const record =
+    document.getElementById("record");
 
-        score++;
-        scoreElement.textContent = score;
 
-        // Ускоряем игру
-        timeLimit = Math.max(500, 2000 - score * 60);
+let score = 0;
 
-        // Уменьшаем квадрат
-        const size = Math.max(30, 80 - score * 2);
-        target.style.width = size + "px";
-        target.style.height = size + "px";
+let best =
+    Number(localStorage.getItem("techRushBest")) || 0;
 
-        // Меняем цвет
-        const colors = [
-            "#ef4444",
-            "#f97316",
-            "#eab308",
-            "#22c55e",
-            "#06b6d4",
-            "#8b5cf6",
-            "#ec4899"
-        ];
+let gameRunning = false;
 
-        target.style.background =
-            colors[score % colors.length];
+let timer;
 
-        moveTarget();
-        startTimer();
-    }
+let timeLimit = 1800;
 
-    function moveTarget() {
-        const size = target.offsetWidth || 80;
 
-        const maxX = window.innerWidth - size;
-        const maxY = window.innerHeight - size;
+const objects = [
+    "🤖",
+    "🧬",
+    "🚀",
+    "💡",
+    "⚡",
+    "🛰️",
+    "🔬",
+    "🧠",
+    "🌱",
+    "💻"
+];
 
-        // Не спавним слишком близко к верхней панели
-        const minY = 110;
 
-        const x = Math.random() * maxX;
-        const y = minY + Math.random() * (maxY - minY);
+bestElement.textContent = best;
 
-        target.style.left = x + "px";
-        target.style.top = y + "px";
-    }
 
-    function startTimer() {
-        clearTimeout(timer);
+// Нажатие
+target.addEventListener(
+    "click",
+    hitTarget
+);
 
-        timerFill.style.transition = "none";
-        timerFill.style.width = "100%";
+
+// Запуск игры
+function startGame() {
+
+    score = 0;
+
+    timeLimit = 1800;
+
+    gameRunning = true;
+
+    scoreElement.textContent = score;
+
+    menu.style.display = "none";
+
+    gameOver.style.display = "none";
+
+    target.style.display = "flex";
+
+    target.style.width = "85px";
+    target.style.height = "85px";
+
+    moveTarget();
+
+    startTimer();
+}
+
+
+// Попадание
+function hitTarget() {
+
+    if (!gameRunning) return;
+
+    score++;
+
+    scoreElement.textContent = score;
+
+
+    // Ускоряем игру
+    timeLimit =
+        Math.max(
+            500,
+            1800 - score * 55
+        );
+
+
+    // Уменьшаем объект
+    const size =
+        Math.max(
+            42,
+            85 - score * 1.8
+        );
+
+    target.style.width =
+        size + "px";
+
+    target.style.height =
+        size + "px";
+
+
+    // Новый объект
+    target.innerHTML =
+        `<div class="scan"></div>
+        ${
+            objects[
+                Math.floor(
+                    Math.random() *
+                    objects.length
+                )
+            ]
+        }`;
+
+
+    moveTarget();
+
+    startTimer();
+}
+
+
+// Перемещение
+function moveTarget() {
+
+    const size =
+        target.offsetWidth || 85;
+
+    const padding = 10;
+
+    const minY = 110;
+
+    const maxX =
+        window.innerWidth -
+        size -
+        padding;
+
+    const maxY =
+        window.innerHeight -
+        size -
+        padding;
+
+
+    const x =
+        padding +
+        Math.random() *
+        Math.max(
+            1,
+            maxX - padding
+        );
+
+
+    const y =
+        minY +
+        Math.random() *
+        Math.max(
+            1,
+            maxY - minY
+        );
+
+
+    target.style.left =
+        x + "px";
+
+    target.style.top =
+        y + "px";
+}
+
+
+// Таймер
+function startTimer() {
+
+    clearTimeout(timer);
+
+    timerFill.style.transition =
+        "none";
+
+    timerFill.style.width =
+        "100%";
+
+
+    requestAnimationFrame(() => {
 
         requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                timerFill.style.transition =
-                    `width ${timeLimit}ms linear`;
-                timerFill.style.width = "0%";
-            });
+
+            timerFill.style.transition =
+                `width ${timeLimit}ms linear`;
+
+            timerFill.style.width =
+                "0%";
+
         });
 
-        timer = setTimeout(endGame, timeLimit);
+    });
+
+
+    timer =
+        setTimeout(
+            endGame,
+            timeLimit
+        );
+}
+
+
+// Конец игры
+function endGame() {
+
+    gameRunning = false;
+
+    clearTimeout(timer);
+
+    target.style.display = "none";
+
+    finalScore.textContent =
+        score;
+
+
+    if (score > best) {
+
+        best = score;
+
+        localStorage.setItem(
+            "techRushBest",
+            best
+        );
+
+        bestElement.textContent =
+            best;
+
+        record.textContent =
+            "🏆 Новый технологический рекорд!";
+
+    } else {
+
+        record.textContent =
+            `Лучший результат: ${best}`;
+
     }
 
-    function endGame() {
-        gameRunning = false;
-        clearTimeout(timer);
 
-        target.style.display = "none";
+    gameOver.style.display =
+        "flex";
+}
 
-        finalScore.textContent = score;
 
-        if (score > best) {
-            best = score;
-            localStorage.setItem("squareBest", best);
-            bestElement.textContent = best;
-            record.textContent = "🏆 Новый рекорд!";
-        } else {
-            record.textContent = `Лучший результат: ${best}`;
+// Изменение размера экрана
+window.addEventListener(
+    "resize",
+    () => {
+
+        if (gameRunning) {
+            moveTarget();
         }
 
-        gameOver.style.display = "flex";
     }
+);
 
-    window.addEventListener("resize", () => {
-        if (gameRunning) moveTarget();
-    });
 </script>
 
 </body>
