@@ -834,9 +834,17 @@ target.addEventListener(
 // =========================
 
 async function submitOnlineScore(finalScoreValue) {
-    const name = (prompt("Введите ваш ник для турнира:", "Игрок") || "Игрок")
-        .trim()
-        .slice(0, 18) || "Игрок";
+    const PLAYER_NAME_KEY = "techRushPlayerName";
+    let name = localStorage.getItem(PLAYER_NAME_KEY) || "";
+
+    // Спрашиваем ник только один раз на этом устройстве.
+    if (!name) {
+        name = (prompt("Введите ваш ник для турнира:", "Игрок") || "Игрок")
+            .trim()
+            .slice(0, 18) || "Игрок";
+
+        localStorage.setItem(PLAYER_NAME_KEY, name);
+    }
 
     try {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/leaderboard`, {
